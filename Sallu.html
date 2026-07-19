@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saloni's Creation | Handmade Resin Art</title>
+<style>
+  :root{
+    --terracotta:#c9683e;
+    --gold:#d4a24e;
+    --cream:#fdf6ec;
+    --dark:#3b2b22;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+  body{background:var(--cream);color:var(--dark);}
+  a{text-decoration:none;color:inherit;}
+
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 40px;background:var(--white);position:sticky;top:0;z-index:100;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  }
+  .logo{font-size:1.6rem;font-weight:bold;color:var(--terracotta);}
+  .logo span{color:var(--gold);}
+  nav ul{display:flex;list-style:none;gap:28px;}
+  nav ul li a{font-weight:600;transition:0.3s;}
+  nav ul li a:hover{color:var(--terracotta);}
+  .header-right{display:flex;align-items:center;gap:18px;}
+  .cart-icon{
+    position:relative;font-size:1.6rem;cursor:pointer;background:none;border:none;
+  }
+  .cart-badge{
+    position:absolute;top:-8px;right:-10px;background:var(--terracotta);color:white;
+    font-size:0.7rem;font-weight:bold;padding:2px 7px;border-radius:50%;
+  }
+  .cart-btn{background:var(--terracotta);color:white;padding:10px 18px;border-radius:30px;font-weight:600;border:none;cursor:pointer;}
+
+  .hero{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:80px 40px;background:linear-gradient(120deg,#fdf6ec,#f6e3c5);
+    flex-wrap:wrap;
+  }
+  .hero-text{max-width:500px;}
+  .hero-text h1{font-size:2.8rem;color:var(--dark);margin-bottom:15px;}
+  .hero-text h1 span{color:var(--terracotta);}
+  .hero-text p{font-size:1.1rem;margin-bottom:25px;color:#5c4a3d;}
+  .btn-primary{
+    background:var(--terracotta);color:white;padding:14px 30px;border-radius:30px;
+    font-weight:600;border:none;cursor:pointer;font-size:1rem;
+  }
+  .btn-primary:hover{background:#a8532f;}
+  .hero-img{
+    width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #f7d9a8, var(--gold));
+    display:flex;align-items:center;justify-content:center;font-size:6rem;
+    box-shadow:0 20px 40px rgba(201,104,62,0.3);
+  }
+
+  .section{padding:70px 40px;}
+  .section-title{text-align:center;margin-bottom:50px;}
+  .section-title h2{font-size:2.2rem;color:var(--dark);}
+  .section-title p{color:#7a6a5d;margin-top:8px;}
+  .section-title h2 span{color:var(--terracotta);}
+
+  .filters{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+  .filter-btn{
+    padding:10px 22px;border-radius:25px;border:2px solid var(--terracotta);
+    background:transparent;color:var(--terracotta);font-weight:600;cursor:pointer;transition:0.3s;
+  }
+  .filter-btn.active, .filter-btn:hover{background:var(--terracotta);color:white;}
+
+  .products-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;
+  }
+  .product-card{
+    background:white;border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:transform 0.3s;
+  }
+  .product-card:hover{transform:translateY(-8px);}
+  .product-img{
+    height:180px;display:flex;align-items:center;justify-content:center;font-size:4rem;
+    background:linear-gradient(135deg,#f6e3c5,#f2c9a0);
+  }
+  .product-info{padding:18px;}
+  .product-info h3{font-size:1.1rem;margin-bottom:6px;}
+  .product-info .cat{font-size:0.8rem;color:var(--gold);font-weight:600;text-transform:uppercase;}
+  .product-info .price{font-size:1.2rem;color:var(--terracotta);font-weight:bold;margin:10px 0;}
+  .btn-row{display:flex;gap:8px;}
+  .add-cart-btn, .buy-now-btn{
+    flex:1;padding:10px;border:none;border-radius:8px;
+    cursor:pointer;font-weight:600;font-size:0.85rem;transition:0.3s;
+  }
+  .add-cart-btn{background:var(--gold);color:var(--dark);}
+  .add-cart-btn:hover{background:#c79040;}
+  .buy-now-btn{background:var(--dark);color:white;}
+  .buy-now-btn:hover{background:var(--terracotta);}
+
+  .occasions{background:linear-gradient(120deg,#fff3df,#fde6c9);}
+  .occ-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;}
+  .occ-card{
+    background:white;padding:30px 20px;border-radius:14px;text-align:center;
+    box-shadow:0 6px 15px rgba(0,0,0,0.06);
+  }
+  .occ-card .icon{font-size:2.5rem;margin-bottom:10px;}
+  .occ-card h4{color:var(--terracotta);margin-bottom:6px;}
+
+  .about{display:flex;align-items:center;gap:50px;flex-wrap:wrap;}
+  .about-img{
+    flex:1;min-width:280px;height:280px;border-radius:20px;
+    background:linear-gradient(135deg,#f2c9a0,#c9683e);
+    display:flex;align-items:center;justify-content:center;font-size:5rem;color:white;
+  }
+  .about-text{flex:1;min-width:280px;}
+  .about-text h2{color:var(--dark);margin-bottom:15px;font-size:2rem;}
+  .about-text p{color:#5c4a3d;line-height:1.7;margin-bottom:12px;}
+
+  .testimonials{background:var(--white);}
+  .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;}
+  .test-card{background:var(--cream);padding:25px;border-radius:14px;}
+  .test-card p{font-style:italic;margin-bottom:15px;color:#5c4a3d;}
+  .test-card h5{color:var(--terracotta);}
+  .stars{color:var(--gold);margin-bottom:10px;}
+
+  .custom-order{background:linear-gradient(120deg,#3b2b22,#5c4232);color:white;}
+  .custom-order .section-title h2{color:white;}
+  .custom-order .section-title p{color:#e0d0c0;}
+  form{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+  form input, form select, form textarea{
+    padding:14px;border-radius:8px;border:none;font-size:1rem;font-family:inherit;
+  }
+  form button{
+    padding:14px;background:var(--gold);color:var(--dark);font-weight:bold;border:none;
+    border-radius:8px;cursor:pointer;font-size:1rem;
+  }
+  form button:hover{background:#c79040;}
+
+  footer{background:var(--dark);color:white;padding:50px 40px 20px;}
+  .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin-bottom:30px;}
+  .footer-grid h4{color:var(--gold);margin-bottom:15px;}
+  .footer-grid p, .footer-grid a{color:#d8c8ba;display:block;margin-bottom:8px;}
+  .footer-bottom{text-align:center;border-top:1px solid #5c4a3d;padding-top:20px;color:#a99686;}
+
+  .whatsapp-float{
+    position:fixed;bottom:25px;right:25px;background:#25D366;color:white;
+    width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:1.8rem;box-shadow:0 6px 15px rgba(0,0,0,0.3);z-index:200;cursor:pointer;
+  }
+
+  /* CART DRAWER */
+  .overlay{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.5);z-index:300;
+  }
+  .overlay.active{display:block;}
+  .cart-drawer{
+    position:fixed;top:0;right:-420px;width:400px;max-width:90%;height:100%;
+    background:white;z-index:301;transition:right 0.4s;display:flex;flex-direction:column;
+    box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  }
+  .cart-drawer.active{right:0;}
+  .cart-header{
+    padding:20px;background:var(--terracotta);color:white;display:flex;
+    justify-content:space-between;align-items:center;
+  }
+  .cart-header h3{font-size:1.3rem;}
+  .close-cart{background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;}
+  .cart-items{flex:1;overflow-y:auto;padding:15px 20px;}
+  .cart-item{
+    display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #eee;align-items:center;
+  }
+  .cart-item-icon{
+    width:60px;height:60px;border-radius:10px;background:linear-gradient(135deg,#f6e3c5,#f2c9a0);
+    display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;
+  }
+  .cart-item-info{flex:1;}
+  .cart-item-info h4{font-size:0.95rem;margin-bottom:4px;}
+  .cart-item-info .price{color:var(--terracotta);font-weight:bold;font-size:0.9rem;}
+  .qty-controls{display:flex;align-items:center;gap:8px;margin-top:6px;}
+  .qty-controls button{
+    width:24px;height:24px;border:1px solid var(--terracotta);background:white;color:var(--terracotta);
+    border-radius:5px;cursor:pointer;font-weight:bold;
+  }
+  .remove-item{background:none;border:none;color:#c0392b;cursor:pointer;font-size:0.8rem;margin-top:6px;text-decoration:underline;}
+  .empty-cart{text-align:center;padding:60px 20px;color:#999;}
+  .cart-footer{padding:20px;border-top:2px solid #eee;}
+  .cart-total{display:flex;justify-content:space-between;font-size:1.2rem;font-weight:bold;margin-bottom:15px;}
+  .checkout-btn{
+    width:100%;padding:14px;background:var(--dark);color:white;border:none;border-radius:8px;
+    font-weight:600;cursor:pointer;font-size:1rem;
+  }
+  .checkout-btn:hover{background:var(--terracotta);}
+
+  /* CHECKOUT MODAL */
+  .checkout-modal{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:400;
+    align-items:center;justify-content:center;background:rgba(0,0,0,0.6);
+  }
+  .checkout-modal.active{display:flex;}
+  .checkout-box{
+    background:white;border-radius:16px;padding:30px;width:500px;max-width:90%;
+    max-height:85vh;overflow-y:auto;
+  }
+  .checkout-box h3{color:var(--terracotta);margin-bottom:20px;font-size:1.4rem;}
+  .checkout-box .order-summary{
+    background:var(--cream);padding:15px;border-radius:10px;margin-bottom:20px;font-size:0.9rem;
+  }
+  .checkout-box .order-summary div{display:flex;justify-content:space-between;margin-bottom:6px;}
+  .checkout-box form input, .checkout-box form textarea{
+    border:1px solid #ddd;
+  }
+  .close-modal{
+    background:#eee;color:var(--dark);width:100%;margin-top:10px;
+  }
+  .close-modal:hover{background:#ddd !important;}
+  .toast{
+    position:fixed;bottom:100px;right:25px;background:var(--dark);color:white;padding:14px 22px;
+    border-radius:10px;z-index:500;opacity:0;transition:opacity 0.3s;font-weight:600;
+  }
+  .toast.show{opacity:1;}
+
+  @media(max-width:768px){
+    header{flex-direction:column;gap:15px;}
+    nav ul{flex-wrap:wrap;justify-content:center;gap:15px;}
+    .hero{flex-direction:column-reverse;text-align:center;}
+    .hero-text{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Saloni's <span>Creation</span></div>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#occasions">Occasions</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#custom">Custom Order</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="header-right">
+    <button class="cart-icon" onclick="toggleCart(true)">
+      🛒<span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="cart-btn" onclick="window.location.href='#shop'">Shop Now</button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-text">
+    <h1>Handcrafted <span>Resin Art</span> For Every Moment</h1>
+    <p>From personalized keyrings to statement tabletops — Saloni's Creation turns resin into timeless art for your home, gifts, and festivals.</p>
+    <button class="btn-primary" onclick="window.location.href='#shop'">Explore Collection</button>
+  </div>
+  <div class="hero-img">🎨</div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-title">
+    <h2>Our <span>Collection</span></h2>
+    <p>Every piece handmade with love, one pour at a time</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="keyring">Keyrings</button>
+    <button class="filter-btn" data-filter="coaster">Coasters</button>
+    <button class="filter-btn" data-filter="table">Tabletops & Trays</button>
+    <button class="filter-btn" data-filter="decor">Frames & Décor</button>
+    <button class="filter-btn" data-filter="jewelry">Jewelry</button>
+    <button class="filter-btn" data-filter="festival">Festival Specials</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section class="section occasions" id="occasions">
+  <div class="section-title">
+    <h2>Shop By <span>Occasion</span></h2>
+    <p>Celebrate every festival with a personal touch</p>
+  </div>
+  <div class="occ-grid">
+    <div class="occ-card"><div class="icon">🪔</div><h4>Diwali</h4><p>Diyas, décor & gifting sets</p></div>
+    <div class="occ-card"><div class="icon">🎄</div><h4>Christmas</h4><p>Ornaments & festive keepsakes</p></div>
+    <div class="occ-card"><div class="icon">🧵</div><h4>Raksha Bandhan</h4><p>Handmade resin rakhis</p></div>
+    <div class="occ-card"><div class="icon">💍</div><h4>Weddings</h4><p>Favors, nameplates & centerpieces</p></div>
+    <div class="occ-card"><div class="icon">🕉️</div><h4>Pooja & Festivals</h4><p>Idols & festive décor</p></div>
+    <div class="occ-card"><div class="icon">🎁</div><h4>Birthdays</h4><p>Personalized custom gifts</p></div>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-img">👩‍🎨</div>
+  <div class="about-text">
+    <h2>The Story Behind Saloni's Creation</h2>
+    <p>What began as a small passion for resin art has grown into a heartfelt studio dedicated to creating one-of-a-kind pieces for every occasion.</p>
+    <p>Each item is hand-poured, cured, and finished with care — meaning no two pieces are ever exactly alike. When you order from Saloni's Creation, you're getting art made just for you.</p>
+    <p>We specialize in custom colors, personalized names, and festival-themed designs — because every celebration deserves something special.</p>
+  </div>
+</section>
+
+<section class="section testimonials">
+  <div class="section-title">
+    <h2>What Our <span>Customers</span> Say</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"Ordered a custom nameplate for our new home — the quality and detail exceeded expectations!"</p>
+      <h5>— Happy Customer</h5>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"The Diwali diya set was gorgeous and made perfect gifts for family this year."</p>
+      <h5>— Happy Customer</h5>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"Got a river table made — it's the centerpiece of our living room now. Worth every rupee."</p>
+      <h5>— Happy Customer</h5>
+    </div>
+  </div>
+</section>
+
+<section class="section custom-order" id="custom">
+  <div class="section-title">
+    <h2>Request a <span style="color:#d4a24e">Custom</span> Order</h2>
+    <p>Have something specific in mind? Let's create it together.</p>
+  </div>
+  <form onsubmit="submitCustomOrder(event)">
+    <input type="text" id="customName" placeholder="Your Name" required>
+    <input type="tel" id="customPhone" placeholder="Phone / WhatsApp Number" required>
+    <select id="customType" required>
+      <option value="">Select Product Type</option>
+      <option>Keyring</option>
+      <option>Coaster Set</option>
+      <option>Tabletop / Tray</option>
+      <option>Photo Frame</option>
+      <option>Nameplate</option>
+      <option>Jewelry</option>
+      <option>Festival Special</option>
+      <option>Other</option>
+    </select>
+    <textarea id="customDesc" rows="4" placeholder="Describe your custom order (colors, size, occasion, names to include, etc.)" required></textarea>
+    <button type="submit">Send Request via WhatsApp</button>
+  </form>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-title">
+    <h2>Get In <span>Touch</span></h2>
+    <p>We'd love to hear from you</p>
+  </div>
+  <div style="text-align:center;">
+    <p style="font-size:1.1rem;margin-bottom:10px;">📞 +91-8308660085</p>
+    <p style="font-size:1.1rem;margin-bottom:10px;">📧 saloniscreation@gmail.com</p>
+    <p style="font-size:1.1rem;">📍 Based in [Your City] | Shipping Pan-India</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>Saloni's Creation</h4>
+      <p>Handmade resin art for every occasion — crafted with love, delivered with care.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#shop">Shop</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#custom">Custom Orders</a>
+      <a href="#about">About Us</a>
+    </div>
+    <div>
+      <h4>Categories</h4>
+      <a href="#">Keyrings</a>
+      <a href="#">Coasters</a>
+      <a href="#">Tabletops</a>
+      <a href="#">Festival Specials</a>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Saloni's Creation. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="whatsapp-float" onclick="window.open('https://wa.me/918308660085','_blank')">💬</div>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="close-cart" onclick="toggleCart(false)">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsContainer"></div>
+  <div class="cart-footer" id="cartFooter"></div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <h3>📋 Complete Your Order</h3>
+    <div class="order-summary" id="orderSummary"></div>
+    <form onsubmit="submitOrder(event)">
+      <input type="text" id="checkName" placeholder="Full Name" required>
+      <input type="tel" id="checkPhone" placeholder="Phone / WhatsApp Number" required>
+      <input type="text" id="checkAddress" placeholder="Delivery Address" required>
+      <input type="text" id="checkCity" placeholder="City" required>
+      <input type="text" id="checkPincode" placeholder="Pincode" required>
+      <textarea id="checkPersonalize" rows="3" placeholder="Personalization details (names, colors, occasion, size preferences, etc. — optional)"></textarea>
+      <button type="submit">Send Order via WhatsApp ✅</button>
+      <button type="button" class="close-modal" onclick="toggleCheckout(false)">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WHATSAPP_NUMBER = "918308660085";
+
+const products = [
+  {id:1, name:"Floral Bloom Keyring", cat:"keyring", price:149, icon:"🌸"},
+  {id:2, name:"Galaxy Swirl Keyring", cat:"keyring", price:179, icon:"🌌"},
+  {id:3, name:"Dried Flower Keyring", cat:"keyring", price:159, icon:"🌼"},
+  {id:4, name:"Initial Charm Keyring", cat:"keyring", price:199, icon:"🔤"},
+
+  {id:5, name:"Ocean Wave Coaster Set (4pc)", cat:"coaster", price:899, icon:"🌊"},
+  {id:6, name:"Geode Glam Coasters (4pc)", cat:"coaster", price:999, icon:"💎"},
+  {id:7, name:"Marble Elegance Coasters (4pc)", cat:"coaster", price:849, icon:"⚪"},
+
+  {id:8, name:"Royal Mandala Serving Tray", cat:"table", price:1899, icon:"🟠"},
+  {id:9, name:"Floral Fusion Tray", cat:"table", price:1299, icon:"🌺"},
+  {id:10, name:"Rustic Wood-Resin Side Table", cat:"table", price:8999, icon:"🪵"},
+  {id:11, name:"River Flow Center Table", cat:"table", price:15999, icon:"🌀"},
+
+  {id:12, name:"Memory Lane Photo Frame", cat:"decor", price:599, icon:"🖼️"},
+  {id:13, name:"Resin Wall Clock", cat:"decor", price:1799, icon:"🕒"},
+  {id:14, name:"Personalized Nameplate", cat:"decor", price:899, icon:"🏷️"},
+  {id:15, name:"Family Nameplate Deluxe", cat:"decor", price:1499, icon:"🏡"},
+
+  {id:16, name:"Resin Stud Earrings", cat:"jewelry", price:249, icon:"💍"},
+  {id:17, name:"Statement Pendant", cat:"jewelry", price:349, icon:"📿"},
+
+  {id:18, name:"Diwali Diya Set", cat:"festival", price:499, icon:"🪔"},
+  {id:19, name:"Rakhi – Resin Bloom", cat:"festival", price:99, icon:"🧵"},
+  {id:20, name:"Ganesha Idol (Resin Art)", cat:"festival", price:1299, icon:"🕉️"},
+  {id:21, name:"Christmas Ornament Set", cat:"festival", price:599, icon:"🎄"},
+  {id:22, name:"Wedding Favor Box", cat:"festival", price:149, icon:"🎁"},
+];
+
+let cart = JSON.parse(localStorage.getItem('salonisCart') || '[]');
+
+const grid = document.getElementById('productsGrid');
+
+function renderProducts(filter){
+  grid.innerHTML = "";
+  const list = filter === "all" ? products : products.filter(p => p.cat === filter);
+  list.forEach(p => {
+    grid.innerHTML += `
+      <div class="product-card">
+        <div class="product-img">${p.icon}</div>
+        <div class="product-info">
+          <span class="cat">${p.cat}</span>
+          <h3>${p.name}</h3>
+          <div class="price">₹${p.price}</div>
+          <div class="btn-row">
+            <button class="add-cart-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+            <button class="buy-now-btn" onclick="buyNow(${p.id})">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+renderProducts("all");
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(btn.dataset.filter);
+  });
+});
+
+function saveCart(){
+  localStorage.setItem('salonisCart', JSON.stringify(cart));
+  updateCartBadge();
+}
+
+function updateCartBadge(){
+  const count = cart.reduce((sum,item)=>sum+item.qty,0);
+  document.getElementById('cartBadge').textContent = count;
+}
+
+function addToCart(id, silent){
+  const product = products.find(p=>p.id===id);
+  const existing = cart.find(item=>item.id===id);
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({...product, qty:1});
+  }
+  saveCart();
+  if(!silent){
+    showToast(`${product.name} added to cart!`);
+  }
+}
+
+function buyNow(id){
+  addToCart(id, true);
+  toggleCart(false);
+  toggleCheckout(true);
+}
+
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 2200);
+}
+
+function toggleCart(open){
+  document.getElementById('cartDrawer').classList.toggle('active', open);
+  document.getElementById('overlay').classList.toggle('active', open);
+  if(open) renderCart();
+}
+
+function renderCart(){
+  const container = document.getElementById('cartItemsContainer');
+  const footer = document.getElementById('cartFooter');
+
+  if(cart.length === 0){
+    container.innerHTML = `<div class="empty-cart">Your cart is empty 🛒<br>Add some beautiful resin art!</div>`;
+    footer.innerHTML = "";
+    return;
+  }
+
+  container.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-icon">${item.icon}</div>
+      <div class="cart-item-info">
+        <h4>${item.name}</h4>
+        <div class="price">₹${item.price} x ${item.qty} = ₹${item.price*item.qty}</div>
+        <div class="qty-controls">
+          <button onclick="changeQty(${item.id}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+        <button class="remove-item" onclick="removeItem(${item.id})">Remove</button>
+      </div>
+    </div>
+  `).join('');
+
+  const total = cart.reduce((sum,item)=>sum+item.price*item.qty, 0);
+  footer.innerHTML = `
+    <div class="cart-total"><span>Total:</span><span>₹${total}</span></div>
+    <button class="checkout-btn" onclick="toggleCart(false); toggleCheckout(true);">Proceed to Checkout</button>
+  `;
+}
+
+function changeQty(id, delta){
+  const item = cart.find(i=>i.id===id);
+  item.qty += delta;
+  if(item.qty <= 0){
+    cart = cart.filter(i=>i.id!==id);
+  }
+  saveCart();
+  renderCart();
+}
+
+function removeItem(id){
+  cart = cart.filter(i=>i.id!==id);
+  saveCart();
+  renderCart();
+}
+
+function toggleCheckout(open){
+  document.getElementById('checkoutModal').classList.toggle('active', open);
+  if(open) renderOrderSummary();
+}
+
+function renderOrderSummary(){
+  const summary = document.getElementById('orderSummary');
+  const total = cart.reduce((sum,item)=>sum+item.price*item.qty, 0);
+  summary.innerHTML = cart.map(item=>`
+    <div><span>${item.name} x${item.qty}</span><span>₹${item.price*item.qty}</span></div>
+  `).join('') + `<div style="border-top:1px solid #ccc;margin-top:8px;padding-top:8px;font-weight:bold;"><span>Total</span><span>₹${total}</span></div>`;
+}
+
+function submitOrder(e){
+  e.preventDefault();
+  const name = document.getElementById('checkName').value;
+  const phone = document.getElementById('checkPhone').value;
+  const address = document.getElementById('checkAddress').value;
+  const city = document.getElementById('checkCity').value;
+  const pincode = document.getElementById('checkPincode').value;
+  const personalize = document.getElementById('checkPersonalize').value;
+
+  const total = cart.reduce((sum,item)=>sum+item.price*item.qty, 0);
+  const itemsList = cart.map(item=>`- ${item.name} x${item.qty} = ₹${item.price*item.qty}`).join('\n');
+
+  const message =
+`🛍️ *New Order - Saloni's Creation*
+
+*Customer Details:*
+Name: ${name}
+Phone: ${phone}
+Address: ${address}, ${city} - ${pincode}
+
+*Order Items:*
+${itemsList}
+
+*Total: ₹${total}*
+
+*Personalization Notes:*
+${personalize || "None"}
+
+Please confirm availability and delivery time. Thank you! 🙏`;
+
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+
+  cart = [];
+  saveCart();
+  toggleCheckout(false);
+  e.target.reset();
+}
+
+function submitCustomOrder(e){
+  e.preventDefault();
+  const name = document.getElementById('customName').value;
+  const phone = document.getElementById('customPhone').value;
+  const type = document.getElementById('customType').value;
+  const desc = document.getElementById('customDesc').value;
+
+  const message =
+`✨ *Custom Order Request - Saloni's Creation*
+
+Name: ${name}
+Phone: ${phone}
+Product Type: ${type}
+
+Details:
+${desc}
+
+Looking forward to your quote! 😊`;
+
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+  e.target.reset();
+}
+
+updateCartBadge();
+</script>
+
+</body>
+</html>
